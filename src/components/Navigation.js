@@ -17,6 +17,9 @@ import BoxScreen from '../screens/BoxScreen';
 import MixPanelScreen from '../screens/MixPanelScreen';
 import DateScreen from '../screens/DateScreen';
 
+import UseStateScreen from '../screens/UseStateScreen';
+import UseEffectScreen from '../screens/UseEffectScreen';
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -24,7 +27,7 @@ const Navigation = () => {
         // <Text>Hello</Text>
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen
+                {/* <Stack.Screen
                     name="Home"
                     component={HomeScreen}
                 //   options={{title: 'Welcome'}}
@@ -40,7 +43,10 @@ const Navigation = () => {
                 <Stack.Screen name="TextScreen" component={TextScreen} />
                 <Stack.Screen name="BoxScreen" component={BoxScreen} />
                 <Stack.Screen name="MixPanelScreen" component={MixPanelScreen} />
-                <Stack.Screen name="DateScreen" component={DateScreen} />
+                <Stack.Screen name="DateScreen" component={DateScreen} /> */}
+
+                {/* <Stack.Screen name="UseStateScreen" component={UseStateScreen} /> */}
+                <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>
