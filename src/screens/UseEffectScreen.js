@@ -5,11 +5,25 @@ const UseEffectScreen = () => {
     const [type, setType] = useState("");
     const [data, setData] = useState([]);
 
+    // useEffect(() => {
+    //     console.log(type);
+    //     fetch(`https://jsonplaceholder.typicode.com/${type}`)
+    //         .then(response => response.json())
+    //         .then(json => setData(json))
+    // }, [type]);
+
+
+    // Using async-await
+    const result = async (type) => {
+        let response = await fetch(`https://jsonplaceholder.typicode.com/${type}`);
+        let result = response.json();
+
+        return result;
+    };
+    
     useEffect(() => {
-        console.log(type);
-        fetch(`https://jsonplaceholder.typicode.com/${type}`)
-            .then(response => response.json())
-            .then(json => setData(json))
+        let response = result(type);
+        setData(response);
     }, [type]);
 
     return (
