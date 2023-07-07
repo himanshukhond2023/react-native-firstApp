@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView } from "react-native";
 
 const UseStateScreen = () => {
     const [count, setCount] = useState(0);
+    const [name, setName] = useState({firstName: "", lastName: ""});
+    const [items, setItems] = useState([]);
 
+    // Not a right way to change count value -> unsafe
     // const increment = () => {
     //     setCount(count + 1);
     // }
@@ -15,13 +18,32 @@ const UseStateScreen = () => {
     // }
 
 
-    const changeCount = (amount) => {
-        // console.log("changecount");
-        setCount(prevCount => prevCount + amount);
+    // useState with previous state -> safe
+    // const changeCount = (amount) => {
+    //     // console.log("changecount");
+    //     setCount(prevCount => prevCount + amount);
+    // }
+    // const reset = () => {
+    //     setCount(0);
+    // }
+
+
+    // useState with object
+    const addFirstName = (value) => {
+        setName({...name, firstName: value});
     }
-    const reset = () => {
-        setCount(0);
+    const addLastName = (value) => {
+        setName({...name, lastName: value});
     }
+
+
+    // useState with array
+    // const addItem = () => {
+    //     setItems([...items, {
+    //         id: items.length,
+    //         value: Math.floor(Math.random() * 10) + 1
+    //     }]);
+    // }
 
     return (
         <View style={styles.container}>
@@ -37,7 +59,8 @@ const UseStateScreen = () => {
             </TouchableOpacity> */}
 
 
-            <TouchableOpacity style={styles.button} onPress={() => changeCount(-1)}>
+            {/* useState with previous state */}
+            {/* <TouchableOpacity style={styles.button} onPress={() => changeCount(-1)}>
                 <Text style={styles.text}>-</Text>
             </TouchableOpacity>
             <Text style={styles.text}>Count: {count}</Text>
@@ -46,7 +69,49 @@ const UseStateScreen = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={reset}>
                 <Text style={styles.text}>Reset</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+
+            {/* useState with object */}
+            <TextInput 
+                placeholder="Enter First Name"
+                value={name.firstName}
+                onChangeText={(newValue) => addFirstName(newValue)}
+                style={styles.input}
+                autoCapitalize="none"
+                autoCorrect={false}
+                allowFontScaling
+            />
+            <TextInput
+                placeholder="Enter Last Name"
+                value={name.lastName}
+                onChangeText={(newValue) => addLastName(newValue)}
+                style={styles.input}
+                autoCapitalize="none"
+                autoCorrect={false}
+                allowFontScaling 
+            />
+            {
+                name.firstName ? <Text style={styles.text}>Your first name is {name.firstName}</Text> : null
+            }
+            {
+                name.firstName ? <Text style={styles.text}>Your last name is {name.lastName}</Text> : null
+            }
+            <Text style={styles.text}>{JSON.stringify(name)}</Text>
+
+
+            {/* useState with array */}
+            {/* <Button 
+                title="Add a number"
+                onPress={addItem}
+            />
+            <ScrollView>
+                {
+                    items.map((item) => {
+                        return <Text key={item.id} style={{marginVertical: 10, width: 50}}>{item.id}: {item.value}</Text>
+                    })
+                }
+            </ScrollView> */}
         </View>
     );
 };
@@ -54,8 +119,7 @@ const UseStateScreen = () => {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        padding: 100,
-        
+        padding: 40,
     },
     button: {
         width: 200,
@@ -69,8 +133,18 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     text: {
-        fontSize: 20, 
+        fontSize: 15, 
         fontWeight: "bold"
+    },
+
+    // useState with object
+    input: {
+        width: 200,
+        height: 40,
+        margin: 15,
+        borderColor: "black",
+        borderWidth: 1,
+        marginBottom: 20,
     }
 });
 

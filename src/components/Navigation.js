@@ -45,8 +45,8 @@ const Navigation = () => {
                 <Stack.Screen name="MixPanelScreen" component={MixPanelScreen} />
                 <Stack.Screen name="DateScreen" component={DateScreen} /> */}
 
-                {/* <Stack.Screen name="UseStateScreen" component={UseStateScreen} /> */}
-                <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} />
+                <Stack.Screen name="UseStateScreen" component={UseStateScreen} />
+                {/* <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} /> */}
 
             </Stack.Navigator>
         </NavigationContainer>
