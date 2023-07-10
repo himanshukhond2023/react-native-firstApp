@@ -116,6 +116,87 @@ const UseStateScreen = () => {
     );
 };
 
+
+// useState with object
+// const UseStateScreen = () => {
+//     const [count, setCount] = useState(0);
+//     const [name, setName] = useState({firstName: "", lastName: ""});
+//     const [items, setItems] = useState([]);
+
+//     // useState with object
+//     const addFirstName = (value) => {
+//         setName({...name, firstName: value});
+//     }
+//     const addLastName = (value) => {
+//         setName({...name, lastName: value});
+//     }
+
+//     return (
+//         <View style={styles.container}>
+
+//             {/* useState with object */}
+//             <TextInput 
+//                 placeholder="Enter First Name"
+//                 value={name.firstName}
+//                 onChangeText={(newValue) => addFirstName(newValue)}
+//                 style={styles.input}
+//                 autoCapitalize="none"
+//                 autoCorrect={false}
+//                 allowFontScaling
+//             />
+//             <TextInput
+//                 placeholder="Enter Last Name"
+//                 value={name.lastName}
+//                 onChangeText={(newValue) => addLastName(newValue)}
+//                 style={styles.input}
+//                 autoCapitalize="none"
+//                 autoCorrect={false}
+//                 allowFontScaling 
+//             />
+//             {
+//                 name.firstName ? <Text style={styles.text}>Your first name is {name.firstName}</Text> : null
+//             }
+//             {
+//                 name.firstName ? <Text style={styles.text}>Your last name is {name.lastName}</Text> : null
+//             }
+//             <Text style={styles.text}>{JSON.stringify(name)}</Text>
+//         </View>
+//     );
+// };
+
+
+// useState with array
+// const UseStateScreen = () => {
+//     const [count, setCount] = useState(0);
+//     const [name, setName] = useState({firstName: "", lastName: ""});
+//     const [items, setItems] = useState([]);
+
+//     // useState with array
+//     const addItem = () => {
+//         setItems([...items, {
+//             id: items.length,
+//             value: Math.floor(Math.random() * 10) + 1
+//         }]);
+//     }
+
+//     return (
+//         <View style={styles.container}>
+//             {/* useState with array */}
+//             <Button 
+//                 title="Add a number"
+//                 onPress={addItem}
+//             />
+//             <ScrollView>
+//                 {
+//                     items.map((item) => {
+//                         return <Text key={item.id} style={{marginVertical: 10, width: 50}}>{item.id}: {item.value}</Text>
+//                     })
+//                 }
+//             </ScrollView>
+//         </View>
+//     );
+// };
+
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",

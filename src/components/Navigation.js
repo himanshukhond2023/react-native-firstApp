@@ -19,6 +19,7 @@ import DateScreen from '../screens/DateScreen';
 
 import UseStateScreen from '../screens/UseStateScreen';
 import UseEffectScreen from '../screens/UseEffectScreen';
+import UseContextScreen from '../screens/UseContextScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +47,8 @@ const Navigation = () => {
                 <Stack.Screen name="DateScreen" component={DateScreen} /> */}
 
                 {/* <Stack.Screen name="UseStateScreen" component={UseStateScreen} /> */}
-                <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} />
+                {/* <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} /> */}
+                <Stack.Screen name="UseContextScreen" component={UseContextScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>
