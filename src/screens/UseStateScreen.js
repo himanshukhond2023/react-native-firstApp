@@ -60,7 +60,7 @@ const UseStateScreen = () => {
 
 
             {/* useState with previous state */}
-            {/* <TouchableOpacity style={styles.button} onPress={() => changeCount(-1)}>
+            <TouchableOpacity style={styles.button} onPress={() => changeCount(-1)}>
                 <Text style={styles.text}>-</Text>
             </TouchableOpacity>
             <Text style={styles.text}>Count: {count}</Text>
@@ -69,49 +69,7 @@ const UseStateScreen = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={reset}>
                 <Text style={styles.text}>Reset</Text>
-            </TouchableOpacity> */}
-
-
-            {/* useState with object */}
-            <TextInput 
-                placeholder="Enter First Name"
-                value={name.firstName}
-                onChangeText={(newValue) => addFirstName(newValue)}
-                style={styles.input}
-                autoCapitalize="none"
-                autoCorrect={false}
-                allowFontScaling
-            />
-            <TextInput
-                placeholder="Enter Last Name"
-                value={name.lastName}
-                onChangeText={(newValue) => addLastName(newValue)}
-                style={styles.input}
-                autoCapitalize="none"
-                autoCorrect={false}
-                allowFontScaling 
-            />
-            {
-                name.firstName ? <Text style={styles.text}>Your first name is {name.firstName}</Text> : null
-            }
-            {
-                name.firstName ? <Text style={styles.text}>Your last name is {name.lastName}</Text> : null
-            }
-            <Text style={styles.text}>{JSON.stringify(name)}</Text>
-
-
-            {/* useState with array */}
-            {/* <Button 
-                title="Add a number"
-                onPress={addItem}
-            />
-            <ScrollView>
-                {
-                    items.map((item) => {
-                        return <Text key={item.id} style={{marginVertical: 10, width: 50}}>{item.id}: {item.value}</Text>
-                    })
-                }
-            </ScrollView> */}
+            </TouchableOpacity>
         </View>
     );
 };
