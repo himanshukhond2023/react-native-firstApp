@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import { View, Text } from "react-native";
 import ComponentF from "./ComponentF";
-import { UserContext, ChannelContext } from "../screens/UseContextScreen";
+import { UserContext, ChannelContext } from "../../screens/UseContextScreen";
 
 const ComponentE = () => {
     const user = useContext(UserContext);

@@ -1,5 +1,9 @@
-import React, { useReducer } from "react";
-import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import React, { useReducer, useContext, useState, useEffect } from "react";
+import { TouchableOpacity, StyleSheet, View, Text, ScrollView } from "react-native";
+import ComponentA from "../components/UseReducerComponents/ComponentA";
+import ComponentB from "../components/UseReducerComponents/ComponentB";
+import ComponentC from "../components/UseReducerComponents/ComponentC";
+import axios from "axios";
 
 // useReducer (simple state and action)
 // const initialState = 0;
@@ -96,51 +100,156 @@ import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 
 
 // Multiple useReducers
-const initialState = 0;
+// const initialState = 0;
+// const reducer = (state, action) => {
+//     switch(action) {
+//         case "increment":
+//             return state + 1;
+//         case "decrement":
+//             return state - 1;
+//         case "reset":
+//             return initialState;
+//         default:
+//             return state;
+//     }
+// }
+// const UseReducerScreen = () => {
+//     const [count, dispatch] = useReducer(reducer, initialState);
+//     const [countTwo, dispatchTwo] = useReducer(reducer, initialState);
+
+//     return (
+//         <View style={styles.container}>
+//             {/* Count One */}
+//             <Text style={styles.text}>Count One: {count}</Text>
+//             <TouchableOpacity style={styles.button} onPress={() => dispatch("increment")}>
+//                 <Text style={styles.text}>Increment</Text>
+//             </TouchableOpacity>
+//             <TouchableOpacity style={styles.button} onPress={() => dispatch("decrement")}>
+//                 <Text style={styles.text}>Decrement</Text>
+//             </TouchableOpacity>
+//             <TouchableOpacity style={styles.button} onPress={() => dispatch("reset")}>
+//                 <Text style={styles.text}>Reset</Text>
+//             </TouchableOpacity>
+
+//             {/* Count Two */}
+//             <View style={styles.container}>
+//                 <Text style={styles.text}>Count Two: {countTwo}</Text>
+//                 <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("increment")}>
+//                     <Text style={styles.text}>Increment</Text>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("decrement")}>
+//                     <Text style={styles.text}>Decrement</Text>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("reset")}>
+//                     <Text style={styles.text}>Reset</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         </View>
+//     );
+// }
+
+
+// useReducer with useContext
+// export const CountContext = React.createContext();
+// const initialState = 0;
+// const reducer = (state, action) => {
+//     switch(action) {
+//         case "increment":
+//             return state + 1;
+//         case "decrement":
+//             return state - 1;
+//         case "reset":
+//             return initialState;
+//         default:
+//             return state;
+//     }
+// }
+// const UseReducerScreen = () => {
+//     const [count, dispatch] = useReducer(reducer, initialState);
+//     return (
+//         <CountContext.Provider value={{countState: count, countDispatch: dispatch}}>
+//             <View style={styles.container}>
+//                 <Text>Count: {count}</Text>
+//                 <ComponentA /> 
+//                 <ComponentB />
+//                 <ComponentC />
+//             </View>
+//         </CountContext.Provider>
+//     );
+// }
+
+
+// Fetching data with useReducer - will use useState just for example and then useReducer
+// const UseReducerScreen = () => {
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState("");
+//     const [post, setPost] = useState({});
+
+//     useEffect(async () => {
+//         try {
+//             const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1")
+//             const result = await response.data;
+//             setLoading(false);
+//             setPost(result);
+//             setError("");
+//         } catch(error) {
+//             setLoading(false);
+//             setPost({});
+//             setError("Something went Wrong!");
+//             console.log(error);
+//         }
+//     }, []);
+//     return (
+//         <View style={styles.container}>
+//             <Text>{loading ? "Loading..." : post.title}</Text>
+//             <Text>{error ? error : null}</Text>
+
+//         </View>
+//     );
+// }
+
+
+// Fetching data with useReducer - will use useReducer now
+const initialState = {
+    loading: true,
+    error: "",
+    post: {}
+}
 const reducer = (state, action) => {
-    switch(action) {
-        case "increment":
-            return state + 1;
-        case "decrement":
-            return state - 1;
-        case "reset":
-            return initialState;
-        default:
+    switch(action.type) {
+        case "FETCH_SUCCESS": 
+            return {
+                loading: false,
+                post: action.payload,
+                error: ""
+            }
+        case "FETCH_ERROR":
+            return {
+                loading: false,
+                post: {},
+                error: "Something Went Wrong!"
+            }
+        default: 
             return state;
     }
 }
-
 const UseReducerScreen = () => {
-    const [count, dispatch] = useReducer(reducer, initialState);
-    const [countTwo, dispatchTwo] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(async () => {
+        try {
+            const response = await axios.get("https://jsonplaceholder.typicod.com/posts/1");
+            const result = await response.data;
+            dispatch({type: "FETCH_SUCCESS", payload: result});
+        } catch(error) {
+            dispatch({type: "FETCH_ERROR"})
+        }
+    });
 
     return (
         <View style={styles.container}>
-            {/* Count One */}
-            <Text style={styles.text}>Count One: {count}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => dispatch("increment")}>
-                <Text style={styles.text}>Increment</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => dispatch("decrement")}>
-                <Text style={styles.text}>Decrement</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => dispatch("reset")}>
-                <Text style={styles.text}>Reset</Text>
-            </TouchableOpacity>
-
-            {/* Count Two */}
-            <View style={styles.container}>
-                <Text style={styles.text}>Count Two: {countTwo}</Text>
-                <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("increment")}>
-                    <Text style={styles.text}>Increment</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("decrement")}>
-                    <Text style={styles.text}>Decrement</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => dispatchTwo("reset")}>
-                    <Text style={styles.text}>Reset</Text>
-                </TouchableOpacity>
-            </View>
+            <Text>{state.loading ? "Loading.." : state.post.title}</Text>
+            <Text>{state.error ? state.error : null }</Text>
         </View>
     );
 }

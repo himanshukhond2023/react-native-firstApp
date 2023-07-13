@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import ComponentC from "../components/ComponentC";
+import ComponentC from "../components/UseContextComponents/ComponentC";
 
 export const UserContext = React.createContext();
 export const ChannelContext = React.createContext();

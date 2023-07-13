@@ -21,6 +21,7 @@ import UseStateScreen from '../screens/UseStateScreen';
 import UseEffectScreen from '../screens/UseEffectScreen';
 import UseContextScreen from '../screens/UseContextScreen';
 import UseReducerScreen from '../screens/UseReducerScreen';
+import UseCallbackScreen from '../screens/UseCallbackScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,7 +51,9 @@ const Navigation = () => {
                 {/* <Stack.Screen name="UseStateScreen" component={UseStateScreen} /> */}
                 {/* <Stack.Screen name="UseEffectScreen" component={UseEffectScreen} /> */}
                 {/* <Stack.Screen name="UseContextScreen" component={UseContextScreen} /> */}
-                <Stack.Screen name="UseReducerScreen" component={UseReducerScreen} />
+                {/* <Stack.Screen name="UseReducerScreen" component={UseReducerScreen} /> */}
+                <Stack.Screen name="UseCallbackScreen" component={UseCallbackScreen} />
+
 
             </Stack.Navigator>
         </NavigationContainer>
